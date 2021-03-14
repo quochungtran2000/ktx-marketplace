@@ -1,5 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -17,7 +19,9 @@ function App() {
         >
           Learn React
         </a>
+        <button onClick={() => toast.success('click')}>Click</button>
       </header>
+      <ToastContainer />
     </div>
   );
 }
