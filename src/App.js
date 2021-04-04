@@ -1,28 +1,12 @@
-import logo from './logo.svg';
+import React from 'react'
 import './App.css';
-import { ToastContainer, toast } from 'react-toastify';
+import './index.css'
 import 'react-toastify/dist/ReactToastify.css';
-
+import Layout from './components/Layout/Layout'
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <button onClick={() => toast.success('click')}>Click</button>
-      </header>
-      <ToastContainer />
-    </div>
+    <Layout />
   );
 }
 
