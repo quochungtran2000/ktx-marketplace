@@ -1,24 +1,26 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom'
 const StickyNav = () => {
   const logoUrl = `https://upload.wikimedia.org/wikipedia/vi/c/c6/Logo_KTX_%C4%90HQGTPHCM.png`
   return (
     <header className="header">
-        <img className="header__logo" src={logoUrl} alt="ktx-marketplace-logo" width={70}/>
+      <Link className="header__logo" to="/">
+        <img src={logoUrl} alt="ktx-marketplace-logo" width={70}/>
+      </Link>
         <nav className="header__nav">
           <ul className="nav__links">
             <li>
               {/* <Link to={"/"}><a href="/">ád</a></Link> */}
-              <a className="nav__link" href="/">Trang chủ</a>
+              <Link className="nav__link" to="/">Trang chủ</Link>
             </li>
             <li>
-              <a className="nav__link" href="/">Tin Tức</a>
+              <Link className="nav__link" to="/news">Tin Tức</Link>
             </li>
             <li>
-              <a className="nav__link" href="/">Cộng Đồng</a>
+              <Link className="nav__link" to="/communicate">Cộng Đồng</Link>
             </li>
             <li>
-              <a className="nav__link" href="/">Liên Hệ</a>
+              <Link className="nav__link" to="/contact">Liên Hệ</Link>
             </li>
           </ul>
         </nav>
