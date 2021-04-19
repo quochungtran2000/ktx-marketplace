@@ -6,30 +6,37 @@ import CategoryAndLocation from '../components/CategoryAndLocation';
 import NewsWithCategory from '../components/NewsWithCategory';
 import { PostMockData } from '../mockData/PostMockData';
 import { BannerMockData } from '../mockData/BannerMockData';
-import Axios from 'axios';
+import bannerApi from '../api/bannerApi';
+import locationApi from '../api/locationApi';
+import categoryApi from '../api/categoryApi';
 
 export default function Home() {
   const [location, setLocation] = useState([]);
   const [category, setCategory] = useState([]);
   const [banner, setBanner] = useState([]);
+  const [bannerLoading, setBannerLoading] = useState(true);
 
-  console.log(location)
   useEffect(() => {
-    Axios.get('http://localhost:1708/location')
-    .then((locations) => setLocation(locations.data));
-    Axios.get('http://localhost:1708/category')
-    .then((categories) => setCategory(categories.data));
-    Axios.get('http://localhost:1708/banner')
-    .then((banner) => setCategory(banner.data));
-  }, [setLocation, setCategory, setBanner])
+    const fetchData = async () => {
+      const bannerResponse = await bannerApi.getAll();
+      const locationResponse = await locationApi.getAll();
+      const categoryResponse = await categoryApi.getAll();
+      console.log(`bannerResponse`, bannerResponse);
+      console.log(`locationResponse`, locationResponse);
+      console.log(`categoryResponse`, categoryResponse);
+      setLocation(locationResponse);
+      setCategory(categoryResponse);
+      setBanner(bannerResponse);
+      setBannerLoading(false);
+      window.scrollTo(0, 0)
+    }
+    fetchData();
+  }, [])
 
-  console.log(`banner`, banner);
-  console.log(`category`, category);
-  console.log(`location`, location);
 
   return (
     <Layout>
-      <CustomSlider data={BannerMockData} />
+      <CustomSlider data={ banner ||BannerMockData } loading={bannerLoading} />
       <CategoryAndLocation category={category} location={location} />
       <NewsWithTitle title={`Tin rao vặt hằng ngày`} data={PostMockData} />
       <NewsWithTitle title={`Tin rao vặt tại TP. HCM`} data={PostMockData} />

@@ -8,7 +8,10 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
+    <Router onUpdate={() => window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    })}>
       <App />
       <ToastContainer />
     </Router>

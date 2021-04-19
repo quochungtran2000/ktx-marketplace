@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
+import Loading from "../Loading/Loading";
 import '../../assets/css/slick.css'
 
 const CustomSlider = (props)  =>  {
@@ -10,19 +11,25 @@ const CustomSlider = (props)  =>  {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: false
+    arrows: false,
+    autoplay: true,
+    lazyLoad: 'ondemand',
+    autoplaySpeed: 1000
   };
 
-  const { data } = props;
+  const { data, loading } = props;
 
   return (
     <div className="slick">
       <Slider {...settings}>
-        {data && data.map((banner, index) => (
-          <Link key={index} to={banner.link}>
+        {!loading && data && data.map((banner, index) => (
+          <Link key={index} to={banner.link} style={{overflow: 'hidden'}}>
             <img src={banner.image_url} alt={banner?.description} style={{width: '100%'}}></img>
           </Link>
         ))}
+        {loading && <Loading />}
+        {loading && <Loading />}
+        {loading && <Loading />}
         {/* <div>
           
         </div>

@@ -1,6 +1,7 @@
 
 .slick {
   margin-bottom: 3rem;
+  background-color: #ecf0f1;
 }
 
 .slick .slick-dots{
@@ -12,11 +13,19 @@
 }
 
 .slick-dots li button:before {
-  font-size: 1rem;
-  color: white;
+  font-size: 0.7rem;
+  color: #7f8c8d;
   opacity: 0.85;
 }
 
 .slick-dots li.slick-active button:before{
   opacity: 1;
+}
+
+.slick-slide {
+  height:400px;
+}
+
+.slick-slide img {
+  height:400px;
 }

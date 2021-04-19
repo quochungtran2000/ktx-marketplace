@@ -12,10 +12,10 @@ export default function index(props) {
     <div className="container">
       <div className="row mt-2">
         <div className="w-100">
-          <h3 className="d-inline" style={{ borderBottom: '1px solid #ddd', paddingBottom: '0.5rem',marginBottom: '1rem'}}>
-            <i className="far fa-newspaper" style={{fontSize: '1.7rem', marginRight: '1rem'}}></i>
+          <h5 className="d-inline" style={{ borderBottom: '1px solid #ddd', paddingBottom: '0.5rem',marginBottom: '1rem'}}>
+            <i className="far fa-newspaper" style={{fontSize: '1.2rem', marginRight: '1rem'}}></i>
             {title}
-          </h3>
+          </h5>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)',marginTop: '1rem'}}>
             {
               data.map( (i, index) => {
@@ -25,11 +25,11 @@ export default function index(props) {
                       <img src={i.imageUrl} alt={i.name}></img>
                     </div>
                     <div>
-                      <a style={{textDecoration: 'none', fontWeight: 'bold', color: 'black'}} href="/">{`Post Number ${Math.floor(Math.random()*6752)}`}</a>
-                      <p style={{margin: '0'}}><span style={{marginRight: '0.5rem'}}><i className="fas fa-map-marker-alt"></i></span>{location[Math.floor(Math.random()*4)]}</p>
-                      <p style={{margin: '0'}}>
+                      <a style={{textDecoration: 'none', fontWeight: '500', color: 'black'}} href="/">{`Post Number ${Math.floor(Math.random()*6752)}`}</a>
+                      <p style={{margin: '0', opacity: 0.8}}><span style={{marginRight: '0.5rem'}}><i className="fas fa-map-marker-alt"></i></span>{location[Math.floor(Math.random()*4)]}</p>
+                      <p style={{margin: '0', opacity: 0.8}}>
                         <span style={{marginRight: '0.5rem'}}><i className="far fa-clock"></i>{`${Math.floor(Math.random()*60)} phút trước`}</span>
-                        <span style={{margin: '0 0.5rem'}}><i className="far fa-eye"></i>{Math.floor(Math.random()*10000)}</span>
+                        <span><i className="far fa-eye" style={{margin: '0 0.5rem'}}></i>{Math.floor(Math.random()*10000)}</span>
                       </p>
                     </div>
                   </div>
