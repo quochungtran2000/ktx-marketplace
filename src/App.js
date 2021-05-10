@@ -9,21 +9,29 @@ import Communicate from './page/Communicate';
 import Home from './page/Home';
 import Contact from './page/Contact';
 import News from './page/News';
+import NotFound from './page/NotFound';
+import PostDetail from './page/PostDetail';
 
 const getPage = (props) => {
   return (
     <Switch>
-      <Route path="/communicate">
+      <Route exact path="/communicate">
         <Communicate />
       </Route>
-      <Route path="/contact">
+      <Route exact path="/contact">
         <Contact />
       </Route>
-      <Route path="/news">
+      <Route exact path="/news">
         <News />
       </Route>
-      <Route path="/">
+      <Route exact path="/">
         <Home />
+      </Route>
+      <Route path="/post/:slug">
+        <PostDetail />
+      </Route>
+      <Route path="*">
+        <NotFound />
       </Route>
     </Switch>
   )
