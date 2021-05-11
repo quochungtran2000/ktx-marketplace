@@ -3,7 +3,7 @@ import React from 'react'
 export default function index(props) {
   const { data } = props;
   return (
-    <div className="container mt-4">
+    <div className="container my-4">
       <h5 style={{textAlign: 'center'}}>TIN NHANH THEO CHUYÊN MỤC</h5>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6,1fr)',marginTop: '1rem'}}>
         {data && data.map((cate, index) => (

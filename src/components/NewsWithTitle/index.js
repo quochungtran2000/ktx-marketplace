@@ -3,14 +3,8 @@ import { removeAccents } from '../../assets/consts/function'
 
 export default function index(props) {
   const { title, data } = props;
-  // const location = {
-  //   0: 'KTX Khu B',
-  //   1: 'KTX Khu A',
-  //   2: 'TP. HN',
-  //   3: 'TP. HCM'
-  // }
   return (
-    <div className="container">
+    <div className="container my-4">
       <div className="row mt-2">
         <div className="w-100">
           <h5 className="d-inline" style={{ borderBottom: '1px solid #ddd', paddingBottom: '0.5rem',marginBottom: '1rem'}}>
@@ -19,7 +13,7 @@ export default function index(props) {
           </h5>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)',marginTop: '1rem'}}>
             {
-              data?.map( (i, index) => {
+              data?.post.map( (i, index) => {
                 return (
                   <div key={index} style={{display: 'flex', margin: '0.5rem 0'}}>
                     <div style={{marginRight: '1rem'}}>

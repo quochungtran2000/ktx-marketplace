@@ -1,0 +1,19 @@
+.notfound {
+  padding: 10rem 0;
+}
+
+.notfound h1{
+  font-size: 10rem;
+  margin: 0;
+  font-weight: 900;
+  letter-spacing: 1rem;
+  background: url('https://i.pinimg.com/originals/9b/c2/a4/9bc2a43b14d51b31d4868109ad466f99.jpg') center no-repeat;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+}
+
+@media screen and (min-width: 1200px){
+  .notfound {
+    padding: 12rem 0;
+  }
+}

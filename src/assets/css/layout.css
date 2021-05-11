@@ -1,0 +1,12 @@
+.layout-content {
+  min-height : 50vh;
+  display : flex;
+  flex-direction : column;
+}
+
+
+@media screen and (min-width: 1200px) {
+  .layout-content{
+    min-height: 60vh;
+  }
+}
