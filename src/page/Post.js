@@ -19,6 +19,7 @@ export default function Post() {
       setLoading(false);
     }
     fetchData()
+    // eslint-disable-next-line
   },[location.search])
 
   return (
