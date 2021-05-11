@@ -11,6 +11,7 @@ import Contact from './page/Contact';
 import News from './page/News';
 import NotFound from './page/NotFound';
 import PostDetail from './page/PostDetail';
+import Post from './page/Post';
 
 const getPage = (props) => {
   return (
@@ -29,6 +30,9 @@ const getPage = (props) => {
       </Route>
       <Route path="/post/:slug">
         <PostDetail />
+      </Route>
+      <Route path="/post">
+        <Post />
       </Route>
       <Route path="*">
         <NotFound />

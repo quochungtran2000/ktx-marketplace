@@ -14,8 +14,8 @@ import useFetchData from "../hook/useFetchData";
 
 export default function Home() {
   const [bannerData, bannerLoading] = useFetchData(bannerApi.getAll,{},{});
-  const [postData] = useFetchData(postApi.getAll,{},{});
-  const [postHcm] = useFetchData(postApi.getAll, { location : 3},{});
+  const [postData, postDataLoading] = useFetchData(postApi.getAll,{},{});
+  const [postHcm, postHcmLoading] = useFetchData(postApi.getAll, { location : 3},{});
   const [locationData] = useFetchData(locationApi.getAll,{},{});
   const [categoryData] = useFetchData(categoryApi.getAll,{},{});
 
@@ -23,8 +23,8 @@ export default function Home() {
     <Layout>
       <CustomSlider data={ bannerData ||BannerMockData } loading={bannerLoading} />
       <CategoryAndLocation category={categoryData} location={locationData} />
-      <NewsWithTitle title={`Tin rao vặt hằng ngày`} data={postData} /> 
-      <NewsWithTitle title={`Tin rao vặt tại TP. HCM`} data={postHcm} />
+      <NewsWithTitle title={`Tin rao vặt hằng ngày`} data={postData} loading={postDataLoading}/> 
+      <NewsWithTitle title={`Tin rao vặt tại TP. HCM`} data={postHcm} loading={postHcmLoading} />
       <NewsWithCategory data={categoryData} />
     </Layout>
   )
