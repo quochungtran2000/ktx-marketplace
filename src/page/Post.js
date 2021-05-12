@@ -20,7 +20,7 @@ export default function Post() {
     }
     fetchData()
     // eslint-disable-next-line
-  },[location.search])
+  },[location])
 
   return (
     <Layout title="Post">
