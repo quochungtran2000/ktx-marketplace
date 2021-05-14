@@ -3,11 +3,11 @@ import Layout from '../components/Layout/Layout'
 import { useParams } from "react-router-dom";
 import { getId, createMarkup } from "../assets/consts/function";
 import postApi from "../api/postApi";
-import useFetchData from "../hook/useFetchData";
+import useFetch from '../hook/useFetch'
 
 export default function PostDetail() {
   const { slug } = useParams();
-  const [data, loading] = useFetchData(postApi.getById, +getId(slug), '');
+  const {data ,loading} = useFetch(postApi.getById, +getId(slug))
 
   return (
     <Layout>

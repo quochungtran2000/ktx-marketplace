@@ -1,12 +1,18 @@
 .layout-content {
-  min-height : 50vh;
-  display : flex;
-  flex-direction : column;
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
 }
 
+.grid-layout {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 2rem 0;
+  grid-gap: 1rem;
+}
 
 @media screen and (min-width: 1200px) {
-  .layout-content{
+  .layout-content {
     min-height: 60vh;
   }
 }

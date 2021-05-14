@@ -1,7 +1,9 @@
 import React from "react";
-import { removeAccents } from "../../assets/consts/function";
+// import { removeAccents } from "../../assets/consts/function";
 import Skeleton from "@material-ui/lab/Skeleton";
 import { Link } from "react-router-dom";
+import PostCard from "../PostCard/PostCard";
+import LoadingPostCard from "../Loading/LoadingPostCard";
 export default function index(props) {
   const { title, data, loading = false } = props;
 
@@ -24,78 +26,30 @@ export default function index(props) {
     );
   };
 
-  const renderData = (data) => {
-    return (
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(3,1fr)",
-          marginTop: "1rem",
-        }}
-      >
-        {data?.post.map((i, index) => {
-          return (
-            <div key={index} style={{ display: "flex", margin: "0.5rem 0" }}>
-              <div style={{ marginRight: "1rem" }}>
-                <img src={i.imageUrl} alt={i.name}></img>
-              </div>
-              <div>
-                <a
-                  style={{
-                    textDecoration: "none",
-                    fontWeight: "500",
-                    color: "black",
-                  }}
-                  href={`/post/${removeAccents(i.title, i.id)}`}
-                >
-                  {i.title}
-                </a>
-                <p style={{ margin: "0", opacity: 0.8 }}>
-                  <span style={{ marginRight: "0.5rem" }}>
-                    <i className="fas fa-map-marker-alt"></i>
-                  </span>
-                  {i.location.name}
-                </p>
-                <p style={{ margin: "0", opacity: 0.8 }}>
-                  <span style={{ marginRight: "0.5rem" }}>
-                    <i className="far fa-clock"></i>
-                    {`${Math.floor(Math.random() * 60)} phút trước`}
-                  </span>
-                  <span>
-                    <i
-                      className="far fa-eye"
-                      style={{ margin: "0 0.5rem" }}
-                    ></i>
-                    {Math.floor(Math.random() * 10000)}
-                  </span>
-                </p>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    );
-  };
   return (
     <div className="container my-4">
       <div className="row mt-2">
         <div className="col-12">
           <div className="w-100">
             {loading ? (
-              <Skeleton>{renderTitle(title)}</Skeleton>
+              <Skeleton width="300px" height="30px" />
             ) : (
               renderTitle(title)
             )}
             {loading ? (
-              <Skeleton>{renderData(data)}</Skeleton>
+              <LoadingPostCard />
             ) : (
-              renderData(data)
+              <div className="grid-layout">
+                {data?.post.map((post, index) => (
+                  <PostCard key={index} post={post} />
+                ))}
+              </div>
             )}
           </div>
         </div>
         <div className="col-12 text-center my-2">
           {loading ? (
-            <Skeleton />
+            <Skeleton width="100px" height="30px" />
           ) : (
             <Link to="/post">
               {" "}

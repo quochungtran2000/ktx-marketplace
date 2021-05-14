@@ -8,13 +8,13 @@ const CustomSlider = (props) => {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 500,
+    speed: 2000,
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: false,
     autoplay: true,
     lazyLoad: "ondemand",
-    autoplaySpeed: 1000,
+    autoplaySpeed: 5000,
+    swipeToSlide: true,
   };
 
   const { data, loading } = props;
