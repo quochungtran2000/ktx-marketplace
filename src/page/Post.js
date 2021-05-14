@@ -1,31 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../components/Layout/Layout";
 import CustomPagination from "../components/CustomPagination/CustomPagination";
 import postApi from "../api/postApi";
-import useQueryLocation from "../hook/useQueryLocation";
-import useFetchQuery from "../hook/useFetchQuery";
 import PostCard from "../components/PostCard/PostCard";
 import LoadingPostCard from "../components/Loading/LoadingPostCard";
+import { useLocation } from "react-router";
 export default function Post() {
-  const { query } = useQueryLocation();
-  const { data: postData, loading: postloading } = useFetchQuery(
-    postApi.getAll,
-    query
-  );
+  const [data, setdata ] = useState({})
+  const [loading, setLoading ] = useState(false);
+  const location = useLocation();
+  console.log(location)
+ 
+  useEffect(() => {
+    setLoading(true);
+    const fetchData = async () => {
+      const postData = await postApi.getAll(location?.search?.replace('?',''));
+      setdata(postData);
+      setLoading(false);
+    }
+    fetchData();
+  }, [location?.search])
 
   return (
     <Layout title="Post">
       <div className="container">
-        {postloading ? (
+        {loading ? (
           <LoadingPostCard />
         ) : (
           <div className="grid-layout">
-            {postData?.post?.map((post, index) => (
+            {data?.post?.map((post, index) => (
               <PostCard post={post} key={index} />
             ))}
           </div>
         )}
-        <CustomPagination totalPages={postData?.totalPages} />
+        <CustomPagination totalPages={data?.totalPages} />
       </div>
     </Layout>
   );
