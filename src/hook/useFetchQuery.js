@@ -16,7 +16,7 @@ const useFetchQuery = (func, params = {}) => {
     }
     fetchData();
     // eslint-disable-next-line
-  }, [query]);
+  }, []);
   return {data, loading};
 }
 

@@ -54,6 +54,7 @@ export default function Home() {
         title={`Tin rao vặt tại TP. HCM`}
         data={postHcm}
         loading={postHcmLoading}
+        url={'?location=3'}
       />
       <NewsWithCategory data={categoryData} />
     </Layout>

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import PostCard from "../PostCard/PostCard";
 import LoadingPostCard from "../Loading/LoadingPostCard";
 export default function index(props) {
-  const { title, data, loading = false } = props;
+  const { title, data, loading = false, url = '' } = props;
 
   const renderTitle = (title) => {
     return (
@@ -51,7 +51,7 @@ export default function index(props) {
           {loading ? (
             <Skeleton width="100px" height="30px" />
           ) : (
-            <Link to="/post">
+            <Link to={`/post${url}`}>
               {" "}
               <button className="btn btn-primary">read morre</button>
             </Link>

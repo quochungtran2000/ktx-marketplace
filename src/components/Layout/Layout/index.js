@@ -9,7 +9,7 @@ const Layout = (props) => {
     <Header/>
     {/* style={{minHeight: '50vh', display: 'flex', flexDirection: 'column'}} */}
     <div className="layout-content">
-      {title && <h3 className="text-center mt-4 mb-4">{title}</h3>}
+      {title && <h1 className="text-center mt-4 mb-4">{title}</h1>}
       {props.children}
     </div>
     <Footer/>

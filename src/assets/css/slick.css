@@ -21,11 +21,15 @@
 .slick-dots li.slick-active button:before{
   opacity: 1;
 }
-
+/* 
 .slick-slide {
   height:500px;
-}
+} */
 
 .slick-slide img {
   height:500px;
+}
+
+.related-post-slick .slick-dots{
+  bottom:0;
 }
