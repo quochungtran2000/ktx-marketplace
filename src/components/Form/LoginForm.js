@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import "../../assets/css/loginform.css"
 import Axios from 'axios';
 import { useUser } from '../../contexts/userContext';
+import { toast } from "react-toastify";
 
 
 export default function LoginForm(props) {
@@ -16,8 +17,13 @@ export default function LoginForm(props) {
       const token = `Bearer ${data.jwt}`
       localStorage.setItem('token', token)
       setToken(token)
+      onClose();
+      toast.success('Đăng nhập thành công')
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      console.log(err)
+      toast.error('Sai tên đăng nhập hoặc mật khẩu');
+    });
     // console.log(result)
   } 
 
@@ -41,7 +47,7 @@ export default function LoginForm(props) {
               </div>
               <div className="field btn">
                 <div className="btn-layer"></div>
-                <input type="submit" value="Login" />
+                <input className="login-submit" type="submit" value="Login" />
               </div>
               <div className="signup-link">
                 Not a member? <span>Signup now</span>

@@ -8,19 +8,18 @@ export const useUser = () => useContext(UserContext);
 
 export const UserProvider = (props) => {
   const [token, setToken] = useState(localStorage.getItem('token') || null);
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null);
 console.log(token)
 
 
   useEffect(() => {
+    if(!token){
+      return setUser(null)
+    }
     const fetchUser = async () => {
-      const {data} = await axios.get('https://ktx-be.herokuapp.com/user/getUser', {
+      const {data} = await axios.get('http://localhost:1708/getUser', {
         headers:{
           'Authorization': token,
-          // 'Access-Control-Allow-Origin' : '*',
-          // 'Access-Control-Allow-Methods' : 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-          // 'Accept': "*/*",
-
         }
       })
       console.log(data)

@@ -1,12 +1,31 @@
 import React, { useState } from "react";
 import LoginForm from "../../Form/LoginForm";
+import RegisterForm from '../../Form/RegisterForm';
 import { Link } from "react-router-dom";
+// import { makeStyles } from '@material-ui/core/styles';
+import Avatar from "@material-ui/core/Avatar";
+import noimage from "../../../assets/images/noimage.jpeg";
 import { useUser } from "../../../contexts/userContext";
+
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import Fade from "@material-ui/core/Fade";
+
 const StickyNav = () => {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   const logoUrl = `https://upload.wikimedia.org/wikipedia/vi/c/c6/Logo_KTX_%C4%90HQGTPHCM.png`;
   const [loginOpen, setLoginOpen] = useState(false);
   const [registerOpen, setRegisterOpen] = useState(false);
-  const { user } = useUser();
+  const { user, setToken } = useUser();
   const onOpen = {
     login: () => {
       setLoginOpen(true);
@@ -17,7 +36,6 @@ const StickyNav = () => {
       setRegisterOpen(true);
     },
   };
-  console.log(user, registerOpen);
 
   const onClose = () => {
     setLoginOpen(false);
@@ -54,17 +72,67 @@ const StickyNav = () => {
           </li>
         </ul>
       </nav>
-      {Object.keys(user).length !== 0 ? (
-        <span>{user?.name}</span>
-      ) : (
-        <button
-          onClick={() => onOpen.login()}
-          className="nav__link header__signin"
+      {user ? (
+        <div
+          style={{ borderRadius: "25px", backgroundColor: "#d5d5d5" }}
+          className="d-flex align-items-center"
         >
-          Đăng Nhập
-        </button>
+          <Avatar
+            style={{ marginRight: "1rem" }}
+            alt={user?.name}
+            src={user?.img_url || noimage}
+            aria-controls="fade-menu"
+            aria-haspopup="true"
+            onClick={handleClick}
+          />
+          <strong
+            style={{ marginRight: "1rem", textTransform: "capitalize" }}
+            aria-controls="fade-menu"
+            aria-haspopup="true"
+            onClick={handleClick}
+          >
+            {user?.name}
+          </strong>
+          <Menu
+            id="fade-menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={open}
+            onClose={handleClose}
+            TransitionComponent={Fade}
+          >
+            <MenuItem onClick={handleClose}>Profile</MenuItem>
+            <MenuItem onClick={handleClose}>My account</MenuItem>
+            <MenuItem
+              onClick={() => {
+                localStorage.removeItem("token");
+                setToken(null);
+                handleClose();
+              }}
+            >
+              Logout
+            </MenuItem>
+          </Menu>
+        </div>
+      ) : (
+        <>
+          <button
+            onClick={() => onOpen.login()}
+            className="nav__link header__signin"
+          >
+            Đăng Nhập
+          </button>
+          <button
+            onClick={() => onOpen.register()}
+            className="nav__link header__signin"
+          >
+            Đăng Ký
+          </button>
+        </>
       )}
+
       <LoginForm open={loginOpen} onClose={onClose} />
+      <RegisterForm open={registerOpen} onClose={onClose} openLoginForm={onOpen.login} />
     </header>
   );
 };
