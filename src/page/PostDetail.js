@@ -7,9 +7,7 @@ import useFetch from "../hook/useFetch";
 import useFetchQuery from "../hook/useFetchQuery";
 import Avatar from "@material-ui/core/Avatar";
 import { PostCard, RelatedPostCard } from "../components/PostCard";
-
 import noimage from "../assets/images/noimage.jpeg";
-import CustomSlider from "../components/Slider/Slider";
 import Slider from "react-slick";
 import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
@@ -68,7 +66,7 @@ export default function PostDetail() {
   );
   const { data: postRelatedCategory, loading: postRelatedCategoryLoading } =
     useFetchQuery(postApi.getAll, {
-      category: post?.post?.category?.categody_id,
+      category: post?.post?.category?.category_id,
       size: 3,
     });
   const { data: postRelatedLocation, loading: postRelatedLocationLoading } =
@@ -125,20 +123,21 @@ export default function PostDetail() {
                 ))}
           </div>
         </div>
-        <div className="my-4">CÓ THỂ BẠN CŨNG THÍCH</div>
+        <h4 className="my-4">CÓ THỂ BẠN CŨNG THÍCH</h4>
         <div className="related-post-slick">
-          <Slider {...settings}>
-            {postRelatedLocation?.post?.map((data, index) => (
-              <PostCard post={data} key={index} style={{ margin: "0 1rem" }} />
-            ))}
-          </Slider>
-          {/* <div className="grid-layout">
-            {postRelatedLocationLoading
-              ? "loading"
-              : postRelatedLocation?.post?.map((data, index) => (
-                  <PostCard key={index} post={data} />
-                ))}
-          </div> */}
+          {postRelatedLocationLoading ? (
+            "loading"
+          ) : (
+            <Slider {...settings}>
+              {postRelatedLocation?.post?.map((data, index) => (
+                <PostCard
+                  post={data}
+                  key={index}
+                  style={{ margin: "0 1rem" }}
+                />
+              ))}
+            </Slider>
+          )}
         </div>
       </div>
     </Layout>
