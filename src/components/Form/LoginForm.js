@@ -9,7 +9,7 @@ import { useUser } from '../../contexts/userContext';
 export default function LoginForm(props) {
   const { open, onClose } = props;
   const { register, handleSubmit } = useForm();
-  const { user, setToken } = useUser();
+  const { setToken } = useUser();
   const onSubmit = (data) => {
     Axios.post('https://ktx-be.herokuapp.com/authenticate', data)
     .then(({data}) => {

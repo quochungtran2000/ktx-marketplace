@@ -17,6 +17,7 @@ const StickyNav = () => {
       setRegisterOpen(true);
     },
   };
+  console.log(user, registerOpen);
 
   const onClose = () => {
     setLoginOpen(false);

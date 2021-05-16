@@ -11,9 +11,6 @@ export const UserProvider = (props) => {
   const [user, setUser] = useState({});
 console.log(token)
 
-  const onLogin = () => {
-
-  }
 
   useEffect(() => {
     const fetchUser = async () => {
