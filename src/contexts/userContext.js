@@ -1,13 +1,15 @@
-import { createContext, useState, useEffect } from 'react';
+import axios from 'axios';
+import { createContext, useState, useEffect, useContext } from 'react';
 
 export const UserContext = createContext(null);
 
-const useUser = () => useContext(UserContext);
+export const useUser = () => useContext(UserContext);
 
 
-const UserProvider = (props) => {
+export const UserProvider = (props) => {
   const [token, setToken] = useState(localStorage.getItem('token') || null);
   const [user, setUser] = useState({});
+console.log(token)
 
   const onLogin = () => {
 
@@ -15,10 +17,20 @@ const UserProvider = (props) => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      console.log('login');
+      const {data} = await axios.get('https://ktx-be.herokuapp.com/user/getUser', {
+        headers:{
+          'Authorization': token,
+          // 'Access-Control-Allow-Origin' : '*',
+          // 'Access-Control-Allow-Methods' : 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+          // 'Accept': "*/*",
+
+        }
+      })
+      console.log(data)
+      setUser(data)
     }
     fetchUser()
-  },[])
+  },[token])
 
   return (
     <UserContext.Provider value={{
@@ -28,5 +40,3 @@ const UserProvider = (props) => {
     </UserContext.Provider>
   )
 }
-
-export default { useUser, UserProvider }

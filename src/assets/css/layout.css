@@ -16,3 +16,16 @@
     min-height: 60vh;
   }
 }
+
+
+@media screen and (max-width: 500px){
+  .grid-layout{
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .grid-layout{
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
