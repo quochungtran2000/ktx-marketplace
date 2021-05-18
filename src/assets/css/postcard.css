@@ -116,3 +116,22 @@
   -webkit-line-clamp: 1;
   overflow: hidden;
 }
+
+@media only screen and (max-width: 575.98px) {
+  .grid-layout {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    margin: 2rem 0;
+    grid-gap: 1rem;
+  }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media all and (min-width: 576px) and (max-width: 767.98px) {
+  .grid-layout {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    margin: 2rem 0;
+    grid-gap: 1rem;
+  }
+}

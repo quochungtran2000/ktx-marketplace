@@ -1,14 +1,13 @@
-
 .slick {
   margin-bottom: 3rem;
   background-color: #ecf0f1;
 }
 
-.slick .slick-dots{
+.slick .slick-dots {
   bottom: 25px;
 }
 
-.slick-dots li{
+.slick-dots li {
   bottom: 25px;
 }
 
@@ -18,18 +17,70 @@
   opacity: 0.85;
 }
 
-.slick-dots li.slick-active button:before{
+.slick-dots li.slick-active button:before {
   opacity: 1;
 }
-/* 
-.slick-slide {
-  height:500px;
-} */
 
 .slick-slide img {
-  height:500px;
+  height: 500px;
 }
 
-.related-post-slick .slick-dots{
-  bottom:0;
+.related-post-slick .slick-dots {
+  bottom: 0;
+}
+
+/*================reponsive=================*/
+
+/*======repon mobile=======*/
+
+@media only screen and (max-width: 575.98px) {
+  .slick-slide img {
+    height: auto;
+    max-width: 100%;
+  }
+  .slick-dots li {
+    bottom: 0px;
+  }
+  .slick-dots li.slick-active button:before {
+    color: #f8f4f4;
+  }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media all and (min-width: 576px) and (max-width: 767.98px) {
+  .container {
+    max-width: 630px;
+  }
+  .slick-slide img {
+    height: 350px;
+    max-width: 100%;
+  }
+  .slick-dots li {
+    bottom: 0px;
+  }
+  .slick-dots li.slick-active button:before {
+    color: #f8f4f4;
+  }
+}
+/* 
+  Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .container {
+    max-width: 800px;
+  }
+  .slick-slide img {
+    height: 350px;
+    max-width: 100%;
+  }
+  .slick-dots li {
+    bottom: 0px;
+  }
+  .slick-dots li.slick-active button:before {
+    color: #f8f4f4;
+  }
+}
+
+/*  Large devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+
 }

@@ -1,17 +1,17 @@
-.footer{
+.footer {
   background-color: var(--bg-light);
   line-height: 24px;
   color: #111;
 }
 
-.footer__art{
+.footer__art {
   background-color: var(--bg);
   padding: 1rem;
   padding-top: 3rem;
   clip-path: polygon(0% 5%, 15% 0%, 100% 10%, 100% 100%, 0% 100%);
 }
 
-.footer__content{
+.footer__content {
   max-width: 1080px;
   margin: auto;
   display: grid;
@@ -19,13 +19,13 @@
   grid-gap: 1rem;
 }
 
-.footer__header{
+.footer__header {
   font-size: 17px;
   font-weight: bold;
   padding-block: 16px;
 }
 
-.footer__link{
+.footer__link {
   display: block;
   padding-block: 8px;
   color: white;
@@ -34,7 +34,7 @@
   font-size: 12px;
 }
 
-.footer__link:hover{
+.footer__link:hover {
   opacity: 1;
   font-size: 13px;
   color: white;
@@ -49,24 +49,24 @@
   outline: none;
   transition: 0.3s linear;
 }
-.newsletter__email{
+.newsletter__email {
   background-color: transparent;
   border: 1px var(--white) solid;
   color: var(--text);
 }
 
 .newsletter__email:hover,
-.newsletter__email:focus{
+.newsletter__email:focus {
   background-color: var(--white);
   color: black;
 }
 
-.newsletter__email::placeholder{
+.newsletter__email::placeholder {
   color: var(--white);
   opacity: 1;
 }
 
-.newsletter__submit{
+.newsletter__submit {
   background-color: var(--white);
   color: var(--bg);
   text-transform: uppercase;
@@ -75,20 +75,20 @@
   border: 1px var(--white) solid;
 }
 
-.newsletter__submit:hover{
+.newsletter__submit:hover {
   border: 1px var(--white) solid;
   background-color: var(--bg);
   color: var(--white);
 }
 
-.footer__social{
+.footer__social {
   margin-block: 16px;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-gap: 16px;
 }
 
-.social__item{
+.social__item {
   font-size: 12px;
   padding: 12px;
   text-align: center;
@@ -97,12 +97,18 @@
   width: 100%;
 }
 
-.footer__notice{
+.footer__notice {
   text-align: center;
   padding: 1rem;
 }
 
-.footer__notice strong{
+.footer__notice strong {
   color: var(--text);
-  margin:0 5px;
+  margin: 0 5px;
 }
+
+/*=========repon============*/
+
+/*=========repon============*/
+
+/*=========repon============*/

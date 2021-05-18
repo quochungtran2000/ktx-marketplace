@@ -11,6 +11,8 @@
   grid-gap: 1rem;
 }
 
+
+
 @media screen and (min-width: 1200px) {
   .layout-content {
     min-height: 60vh;
