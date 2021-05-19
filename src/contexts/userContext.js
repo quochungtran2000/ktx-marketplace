@@ -9,7 +9,6 @@ export const useUser = () => useContext(UserContext);
 export const UserProvider = (props) => {
   const [token, setToken] = useState(localStorage.getItem('token') || null);
   const [user, setUser] = useState(null);
-console.log(token)
 
 
   useEffect(() => {
@@ -17,12 +16,11 @@ console.log(token)
       return setUser(null)
     }
     const fetchUser = async () => {
-      const {data} = await axios.get('http://localhost:1708/getUser', {
+      const {data} = await axios.get('https://ktx-be.herokuapp.com/getUser', {
         headers:{
           'Authorization': token,
         }
       })
-      console.log(data)
       setUser(data)
     }
     fetchUser()
@@ -30,7 +28,7 @@ console.log(token)
 
   return (
     <UserContext.Provider value={{
-      user, setToken
+      user, setToken, token
     }}>
       {props.children}
     </UserContext.Provider>

@@ -18,9 +18,6 @@ export default function LoginForm(props) {
       }
     })
     const user = {...data, img_url: cloudinaryReponse?.data?.url}
-    console.log(cloudinaryReponse);
-    console.log(data)
-    console.log(user)
     await Axios.post('https://ktx-be.herokuapp.com/user/createUser', user)
     toast.success('Đăng Ký thành công vui lòng đăng nhập');
     openLoginForm();

@@ -24,7 +24,6 @@ export default function LoginForm(props) {
       console.log(err)
       toast.error('Sai tên đăng nhập hoặc mật khẩu');
     });
-    // console.log(result)
   } 
 
   return (
