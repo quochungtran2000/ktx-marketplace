@@ -1,17 +1,18 @@
-import React from 'react'
-import './App.css';
-import './index.css'
-import 'react-toastify/dist/ReactToastify.css';
-import "slick-carousel/slick/slick.css"; 
+import React from "react";
+import "./App.css";
+import "./index.css";
+import "react-toastify/dist/ReactToastify.css";
+import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Switch, Route } from "react-router-dom";
-import Communicate from './page/Communicate';
-import Home from './page/Home';
-import Contact from './page/Contact';
-import News from './page/News';
-import NotFound from './page/NotFound';
-import PostDetail from './page/PostDetail';
-import Post from './page/Post';
+import { Switch, Route} from "react-router-dom";
+import Communicate from "./page/Communicate";
+import Home from "./page/Home";
+import Contact from "./page/Contact";
+import News from "./page/News";
+import NotFound from "./page/NotFound";
+import PostDetail from "./page/PostDetail";
+import Post from "./page/Post";
+import CreatePost from "./page/CreatePost";
 
 const getPage = (props) => {
   return (
@@ -34,22 +35,18 @@ const getPage = (props) => {
       <Route path="/post">
         <Post />
       </Route>
+      <Route exact path="/createPost">
+        <CreatePost />
+      </Route>
       <Route path="*">
         <NotFound />
       </Route>
     </Switch>
-  )
-}
+  );
+};
 
 function App() {
-
-  return (
-    <>
-      {getPage()}
-    </>
-    );
+  return <>{getPage()}</>;
 }
-
-
 
 export default App;

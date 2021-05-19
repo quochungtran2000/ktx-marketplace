@@ -2,6 +2,7 @@ import React from "react";
 import Layout from "../components/Layout/Layout";
 import { useParams } from "react-router-dom";
 import { getId, createMarkup } from "../assets/consts/function";
+import '../assets/css/postdetail.css'
 import postApi from "../api/postApi";
 import useFetch from "../hook/useFetch";
 import useFetchQuery from "../hook/useFetchQuery";
@@ -76,7 +77,7 @@ export default function PostDetail() {
     });
   return (
     <Layout title={post?.title}>
-      <div className="container">
+      <div className="container post__detail">
         <div className="row">
           <div className="col-8">
             <img

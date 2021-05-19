@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import LoginForm from "../../Form/LoginForm";
-import RegisterForm from '../../Form/RegisterForm';
+import RegisterForm from "../../Form/RegisterForm";
 import { Link } from "react-router-dom";
 // import { makeStyles } from '@material-ui/core/styles';
 import Avatar from "@material-ui/core/Avatar";
@@ -70,6 +70,16 @@ const StickyNav = () => {
               Liên Hệ
             </Link>
           </li>
+
+          {user && (
+            <>
+            <li>
+              <Link className="nav__link" to="/createPost" >
+                Đăng bài
+              </Link>
+            </li>
+            </>
+          )}
         </ul>
       </nav>
       {user ? (
@@ -132,7 +142,11 @@ const StickyNav = () => {
       )}
 
       <LoginForm open={loginOpen} onClose={onClose} />
-      <RegisterForm open={registerOpen} onClose={onClose} openLoginForm={onOpen.login} />
+      <RegisterForm
+        open={registerOpen}
+        onClose={onClose}
+        openLoginForm={onOpen.login}
+      />
     </header>
   );
 };

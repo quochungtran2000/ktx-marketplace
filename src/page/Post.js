@@ -9,7 +9,6 @@ export default function Post() {
   const [data, setdata ] = useState({})
   const [loading, setLoading ] = useState(false);
   const location = useLocation();
-  console.log(location)
  
   useEffect(() => {
     setLoading(true);
