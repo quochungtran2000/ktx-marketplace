@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { ToastContainer } from "react-toastify";
 import { BrowserRouter as Router } from "react-router-dom";
 import { UserProvider } from "./contexts/userContext";
+import { LoadingProvider } from "./contexts/loadingContext";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -18,7 +19,9 @@ ReactDOM.render(
       }
     >
       <UserProvider>
-        <App />
+        <LoadingProvider>
+          <App />
+        </LoadingProvider>
       </UserProvider>
       <ToastContainer />
     </Router>

@@ -20,7 +20,7 @@ export default function PostCard(props) {
         </div>
         {decription && (
           <div className="post__middle">
-            <p className="post__middle-text">{post?.price || "430.000 vnd"}</p>
+            <p className="post__middle-text">{`${post?.price?.toLocaleString('de-DE')} đ`}</p>
           </div>
         )}
       </div>
@@ -47,7 +47,7 @@ export default function PostCard(props) {
                 <span style={{ marginRight: "0.5rem" }}>
                   <i className="fas fa-dollar-sign"></i>
                 </span>
-                {post?.price || "123.345.456 vnd"}
+                {`${post?.price?.toLocaleString('de-DE')} đ`}
               </span>
             ) : (
               post?.content

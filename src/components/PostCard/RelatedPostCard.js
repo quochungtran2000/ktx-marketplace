@@ -1,6 +1,6 @@
 import React from "react";
 import "../../assets/css/relatedpostcard.css";
-import { removeAccents } from "../../assets/consts/function";
+import { getPrice, removeAccents } from "../../assets/consts/function";
 import noimage from "../../assets/images/noimage.jpeg";
 import { Link } from "react-router-dom";
 
@@ -20,7 +20,7 @@ export default function RelatedPostCard(props) {
         </div>
         {decription && (
           <div className="related-post__middle">
-            <p className="related-post__middle-text">{post?.price || "430.000 vnd"}</p>
+            <p className="related-post__middle-text">{getPrice(post?.price)}</p>
           </div>
         )}
       </div>
@@ -47,7 +47,7 @@ export default function RelatedPostCard(props) {
                 <span style={{ marginRight: "0.5rem" }}>
                   <i className="fas fa-dollar-sign"></i>
                 </span>
-                {post?.price || "123.345.456 vnd"}
+                {getPrice(post?.price)}
               </span>
             ) : (
               post?.content

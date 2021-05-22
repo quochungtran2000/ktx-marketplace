@@ -12,6 +12,13 @@ const postApi = {
     const url = `${apiUrl}/post/${id}`;
     return axiosClient.get(url);
   },
+  getByUser: (params) => {
+    const url = `${apiUrl}/post2?${params}`;
+    return axiosClient.get(url);
+  },
+  deleteById: (id) => {
+    return axiosClient.delete(`${apiUrl}/delete/${id}`)
+  }
 }
 
 export default postApi;

@@ -33,23 +33,23 @@ export default function LoginForm(props) {
         </div>
         <div className="form-container">
           <div className="form-inner">
-            <form onSubmit={handleSubmit(onSubmit)} class="signup" enctype="multipart/form-data">
-              <div class="field">
+            <form onSubmit={handleSubmit(onSubmit)} className="signup" encType="multipart/form-data">
+              <div className="field">
                 <input {...register("name")} name="name" type="text" placeholder="Họ Và Tên" required />
               </div>
-              <div class="field">
+              <div className="field">
                 <input {...register("email")} name="email" type="text" placeholder="Email" required />
               </div>
-              <div class="field">
+              <div className="field">
                 <input {...register("phone")} name="phone" type="text" placeholder="Số điện thoại" required />
               </div>
-              <div class="field">
+              <div className="field">
                 <input {...register("username")} name="username" type="text" placeholder="Tên Đăng Nhập" required />
               </div>
-              <div class="field">
+              <div className="field">
                 <input {...register("password")} name="password" type="password" placeholder="Mật Khẩu" required />
               </div>
-              <div class="field">
+              <div className="field">
                 <input
                 {...register("confirmPassword")} name="confirmPassword"
                   type="password"
@@ -57,19 +57,19 @@ export default function LoginForm(props) {
                   required
                 />
               </div>
-              <div class="field">
+              <div className="field">
                 <input {...register("age")} name="age" type="text" placeholder="Tuổi" required />
               </div>
 
-              <div class="field">
+              <div className="field">
                 <input {...register("address")} name="address" type="text" placeholder="Địa chỉ" required />
               </div>
-              <div class="field">
-                <input {...register("file")} name="file" type="file" class="custom-file-input" />
+              <div className="field">
+                <input {...register("file")} name="file" type="file" className="custom-file-input" />
               </div>
 
-              <div class="field btn">
-                <div class="btn-layer"></div>
+              <div className="field btn">
+                <div className="btn-layer"></div>
                 <input type="submit" value="Signup" />
               </div>
             </form>

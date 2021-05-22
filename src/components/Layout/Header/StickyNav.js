@@ -111,8 +111,8 @@ const StickyNav = () => {
             onClose={handleClose}
             TransitionComponent={Fade}
           >
-            <MenuItem onClick={handleClose}>Profile</MenuItem>
-            <MenuItem onClick={handleClose}>My account</MenuItem>
+            <MenuItem onClick={handleClose}><Link to="/myaccount">Tài khoản</Link></MenuItem>
+            <MenuItem onClick={handleClose}><Link to="/mypost">Bài viết</Link></MenuItem>
             <MenuItem
               onClick={() => {
                 localStorage.removeItem("token");

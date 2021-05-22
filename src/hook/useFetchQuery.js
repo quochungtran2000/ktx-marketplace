@@ -5,6 +5,7 @@ import useQueryLocation from './useQueryLocation'
 const useFetchQuery = (func, params = {}) => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState(null);
+  const [reload, setReload] = useState(false)
   const {query} = useQueryLocation()
   useEffect(() => {
     setLoading(true);
@@ -16,8 +17,8 @@ const useFetchQuery = (func, params = {}) => {
     }
     fetchData();
     // eslint-disable-next-line
-  }, []);
-  return {data, loading};
+  }, [reload]);
+  return {data, loading, reload: () => setReload(!reload)};
 }
 
 export default useFetchQuery

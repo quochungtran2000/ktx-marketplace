@@ -82,7 +82,7 @@ export default function PostDetail() {
           <div className="col-8">
             <img
               src={post?.imgUrl || noimage}
-              class="img-fluid"
+              className="img-fluid"
               alt={post?.title}
             />
 
@@ -107,7 +107,7 @@ export default function PostDetail() {
                 <h5>{post?.user?.name}</h5>
                 <span>
                   <a href={`tel:${post?.user?.phone}`}>
-                    <i style={{ marginRight: "1rem" }} class="fas fa-phone"></i>
+                    <i style={{ marginRight: "1rem" }} className="fas fa-phone"></i>
                     {post?.user?.phone}
                   </a>
                 </span>

@@ -23,3 +23,8 @@ export const createMarkup = (data) => {
     __html: data,
   };
 };
+
+
+export const getPrice = (num) => {
+  return `${num?.toLocaleString('de-DE')} đ`
+}

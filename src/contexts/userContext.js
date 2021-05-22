@@ -22,6 +22,7 @@ export const UserProvider = (props) => {
         }
       })
       setUser(data)
+      localStorage.setItem('user',data)
     }
     fetchUser()
   },[token])
