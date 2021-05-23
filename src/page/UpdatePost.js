@@ -10,8 +10,22 @@ import { Editor } from "@tinymce/tinymce-react";
 import { useUser } from "../contexts/userContext";
 import SaveIcon from "@material-ui/icons/Save";
 import Button from "@material-ui/core/Button";
-export default function CreatePost() {
+import postApi from "../api/postApi";
+import { useParams } from 'react-router-dom';
+import { getId } from "../assets/consts/function";
+import useFetch from "../hook/useFetch";
+export default function UpdatePost() {
   const { user, token } = useUser();
+
+  const {slug} = useParams()
+  console.log({slug})
+  const { data: post, loading: postLoading } = useFetch(
+    postApi.getById,
+    +getId(slug)
+  );
+
+  console.log(post)
+
   const { data: locationData, loading: locationLoading } = useFetchQuery(
     locationApi.getAll,
     {}

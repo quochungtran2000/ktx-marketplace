@@ -1,7 +1,7 @@
 import axiosClient from './axiosClient'
 import { apiUrl } from '../assets/consts/variables'
 
-const useApi = {
+const userApi = {
   getAll: (params) => {
     let url = `${apiUrl}/post`;
     if(!!params) url = `${apiUrl}/post?${params}`
@@ -15,7 +15,11 @@ const useApi = {
   getUser: (params) => {
     const url = `${apiUrl}/user/authenticate`;
     return axiosClient.post(url,)
+  },
+  createUser: (user) => {
+    const url = `${apiUrl}/user/signup`
+    return axiosClient.post(url, user)
   }
 }
 
-export default useApi;  
+export default userApi;  

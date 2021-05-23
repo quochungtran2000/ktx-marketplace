@@ -19,6 +19,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
 import { useLoading } from "./contexts/loadingContext";
+import UpdatePost from "./page/UpdatePost";
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -56,6 +57,9 @@ const getPage = (props) => {
       </Route>
       <Route exact path="/mypost">
         <MyPost />
+      </Route>
+      <Route exact path="/update/:slug">
+        <UpdatePost />
       </Route>
       <Route path="*">
         <NotFound />

@@ -4,20 +4,20 @@ import { apiUrl } from '../assets/consts/variables'
 const postApi = {
   getAll: (params) => {
     let url = `${apiUrl}/post`;
-    if(!!params) url = `${apiUrl}/post?${params}`
+    // if(!!params) url = `${apiUrl}/post?${params}`
     // const url = `${apiUrl}/post`;
-    return axiosClient.get(url);
+    return axiosClient.get(url,{ params });
   },
   getById: (id) => {
     const url = `${apiUrl}/post/${id}`;
     return axiosClient.get(url);
   },
   getByUser: (params) => {
-    const url = `${apiUrl}/post2?${params}`;
-    return axiosClient.get(url);
+    const url = `${apiUrl}/post`;
+    return axiosClient.get(url,{ params });
   },
   deleteById: (id) => {
-    return axiosClient.delete(`${apiUrl}/delete/${id}`)
+    return axiosClient.delete(`${apiUrl}/post/${id}`)
   }
 }
 

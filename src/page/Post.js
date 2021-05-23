@@ -5,6 +5,7 @@ import postApi from "../api/postApi";
 import PostCard from "../components/PostCard/PostCard";
 import LoadingPostCard from "../components/Loading/LoadingPostCard";
 import { useLocation } from "react-router";
+import queryString from 'query-string'
 export default function Post() {
   const [data, setdata ] = useState({})
   const [loading, setLoading ] = useState(false);
@@ -13,7 +14,7 @@ export default function Post() {
   useEffect(() => {
     setLoading(true);
     const fetchData = async () => {
-      const postData = await postApi.getAll(location?.search?.replace('?',''));
+      const postData = await postApi.getAll(queryString.parse(location?.search?.replace('?','')));
       setdata(postData);
       setLoading(false);
     }

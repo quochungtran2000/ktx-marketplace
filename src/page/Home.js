@@ -10,25 +10,26 @@ import locationApi from "../api/locationApi";
 import categoryApi from "../api/categoryApi";
 import postApi from "../api/postApi";
 import useFetch from "../hook/useFetch";
-import useFetchQuery from "../hook/useFetchQuery";
+// import useFetchQuery from "../hook/useFetchQuery";
 
 export default function Home() {
   const { data: bannerData, loading: bannerLoading } = useFetch(
-    bannerApi.getAll
+    bannerApi.getAll,
+    { page: 1 }
   );
-  const { data: postData, loading: postDataLoading } = useFetchQuery(
+  const { data: postData, loading: postDataLoading } = useFetch(
     postApi.getAll,
-    {}
+    { size: 4 }
   );
-  const { data: postHcm, loading: postHcmLoading } = useFetchQuery(
-    postApi.getAll,
-    { location: 3, size: 12 }
-  );
-  const { data: locationData, loading: locationLoading } = useFetchQuery(
+  const { data: postHcm, loading: postHcmLoading } = useFetch(postApi.getAll, {
+    location: 3,
+    size: 3,
+  });
+  const { data: locationData, loading: locationLoading } = useFetch(
     locationApi.getAll,
     {}
   );
-  const { data: categoryData, loading: categoryLoading } = useFetchQuery(
+  const { data: categoryData, loading: categoryLoading } = useFetch(
     categoryApi.getAll,
     {}
   );
@@ -54,7 +55,7 @@ export default function Home() {
         title={`Tin rao vặt tại TP. HCM`}
         data={postHcm}
         loading={postHcmLoading}
-        url={'?location=3'}
+        url={"?location=3"}
       />
       <NewsWithCategory data={categoryData} />
     </Layout>

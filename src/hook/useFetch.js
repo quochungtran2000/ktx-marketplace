@@ -1,6 +1,6 @@
 import  { useState, useEffect} from 'react'
 
-const useFetch = (func, params = '') => {
+const useFetch = (func, params) => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState(null);
   useEffect(() => {
@@ -10,9 +10,10 @@ const useFetch = (func, params = '') => {
       setData(postData);
       setLoading(false);
     }
-    fetchData();
+    return fetchData()
+    // fetchData();
     // eslint-disable-next-line
-  }, [params]);
+  }, []);
   return {data, loading};
 }
 

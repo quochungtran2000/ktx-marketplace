@@ -8,7 +8,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import { getPrice } from "../assets/consts/function";
+import { getPrice, removeAccents } from "../assets/consts/function";
 import CancelIcon from "@material-ui/icons/Cancel";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Button from "@material-ui/core/Button";
@@ -21,6 +21,7 @@ import { useState } from "react";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import { useUser } from "../contexts/userContext";
 import { useLoading } from "../contexts/loadingContext";
+import useFetch from "../hook/useFetch";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -61,7 +62,7 @@ export default function MyPost(props) {
   const [open, setOpen] = useState(false);
   const [select, setSelect] = useState();
   const { user } = useUser();
-  const { data: postData, loading: postDataLoading, reload } = useFetchQuery(
+  const { data: postData, loading: postDataLoading, reload } = useFetch(
     postApi.getByUser,
     { user: user?.userid }
   );
@@ -114,7 +115,7 @@ export default function MyPost(props) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {postData?.map((row) => (
+              {postData?.post?.map((row) => (
                 <TableRow key={row?.id}>
                   <TableCell
                     colSpan="2"
@@ -175,7 +176,7 @@ export default function MyPost(props) {
                   </TableCell>
                   <TableCell colSpan="1" align="left">
                     <span className={classes.cell}>
-                      <Link to={`/update/${row?.id}`}>
+                      <Link to={`/update/${removeAccents(row?.name,row?.id)}`}>
                         <i className="fa fa-edit"></i>
                       </Link>
                     </span>
