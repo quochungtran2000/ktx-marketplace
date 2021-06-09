@@ -25,6 +25,7 @@ export default function UpdatePost() {
   );
 
   console.log(post)
+  console.log(postLoading)
 
   const { data: locationData, loading: locationLoading } = useFetchQuery(
     locationApi.getAll,

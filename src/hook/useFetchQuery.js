@@ -1,6 +1,6 @@
 import  { useState, useEffect} from 'react'
-import queryString from 'query-string'
-import useQueryLocation from './useQueryLocation'
+// import queryString from 'query-string'
+// import useQueryLocation from './useQueryLocation'
 
 const useFetchQuery = (func, params = {}) => {
   const [loading, setLoading] = useState(false);

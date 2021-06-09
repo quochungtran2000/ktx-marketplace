@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import LoginForm from "../../Form/LoginForm";
 import RegisterForm from "../../Form/RegisterForm";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 // import { makeStyles } from '@material-ui/core/styles';
 import Avatar from "@material-ui/core/Avatar";
 import noimage from "../../../assets/images/noimage.jpeg";
@@ -25,7 +25,7 @@ const StickyNav = (props) => {
   const logoUrl = `https://upload.wikimedia.org/wikipedia/vi/c/c6/Logo_KTX_%C4%90HQGTPHCM.png`;
   const [loginOpen, setLoginOpen] = useState(false);
   const [registerOpen, setRegisterOpen] = useState(false);
-  const { user, setToken, logout } = useUser();
+  const { user, logout } = useUser();
   const onOpen = {
     login: () => {
       setLoginOpen(true);
