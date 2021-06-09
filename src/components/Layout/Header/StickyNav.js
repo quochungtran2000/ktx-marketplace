@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import LoginForm from "../../Form/LoginForm";
 import RegisterForm from "../../Form/RegisterForm";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 // import { makeStyles } from '@material-ui/core/styles';
 import Avatar from "@material-ui/core/Avatar";
 import noimage from "../../../assets/images/noimage.jpeg";
@@ -11,7 +11,7 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Fade from "@material-ui/core/Fade";
 
-const StickyNav = () => {
+const StickyNav = (props) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -25,7 +25,7 @@ const StickyNav = () => {
   const logoUrl = `https://upload.wikimedia.org/wikipedia/vi/c/c6/Logo_KTX_%C4%90HQGTPHCM.png`;
   const [loginOpen, setLoginOpen] = useState(false);
   const [registerOpen, setRegisterOpen] = useState(false);
-  const { user, setToken } = useUser();
+  const { user, setToken, logout } = useUser();
   const onOpen = {
     login: () => {
       setLoginOpen(true);
@@ -114,11 +114,7 @@ const StickyNav = () => {
             <MenuItem onClick={handleClose}><Link to="/myaccount">Tài khoản</Link></MenuItem>
             <MenuItem onClick={handleClose}><Link to="/mypost">Bài viết</Link></MenuItem>
             <MenuItem
-              onClick={() => {
-                localStorage.removeItem("token");
-                setToken(null);
-                handleClose();
-              }}
+              onClick={logout}
             >
               Logout
             </MenuItem>

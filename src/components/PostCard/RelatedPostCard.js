@@ -15,7 +15,7 @@ export default function RelatedPostCard(props) {
         <div className="related-post__image">
           <div
             className="related-post__img"
-            style={{ backgroundImage: `url(${post?.imgUrl || noimage})` }}
+            style={{ backgroundImage: `url(${post?.img_url || noimage})` }}
           ></div>
         </div>
         {decription && (

@@ -14,7 +14,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import Button from "@material-ui/core/Button";
 import Layout from "../components/Layout/Layout";
 import postApi from "../api/postApi";
-import useFetchQuery from "../hook/useFetchQuery";
+// import useFetchQuery from "../hook/useFetchQuery";
 // import { toast } from "react-toastify";
 import ModalBase from "../components/Modal/ModalBase";
 import { useState } from "react";

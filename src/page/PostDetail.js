@@ -5,12 +5,12 @@ import { getId, createMarkup } from "../assets/consts/function";
 import '../assets/css/postdetail.css'
 import postApi from "../api/postApi";
 import useFetch from "../hook/useFetch";
-import useFetchQuery from "../hook/useFetchQuery";
 import Avatar from "@material-ui/core/Avatar";
 import { PostCard, RelatedPostCard } from "../components/PostCard";
 import noimage from "../assets/images/noimage.jpeg";
 import Slider from "react-slick";
 import { makeStyles } from "@material-ui/core/styles";
+import { useUser } from "../contexts/userContext";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -29,6 +29,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function PostDetail() {
+  const { user } = useUser()
+  console.log(user)
   const settings = {
     arrows: false,
     dots: true,
@@ -65,13 +67,14 @@ export default function PostDetail() {
     postApi.getById,
     +getId(slug)
   );
+  console.log(post)
   const { data: postRelatedCategory, loading: postRelatedCategoryLoading } =
-    useFetchQuery(postApi.getAll, {
+    useFetch(postApi.getAll, {
       category: post?.post?.category?.category_id,
       size: 3,
     });
   const { data: postRelatedLocation, loading: postRelatedLocationLoading } =
-    useFetchQuery(postApi.getAll, {
+    useFetch(postApi.getAll, {
       location: post?.post?.location?.location_id,
       size: 9,
     });
@@ -81,7 +84,7 @@ export default function PostDetail() {
         <div className="row">
           <div className="col-8">
             <img
-              src={post?.imgUrl || noimage}
+              src={post?.img_url || noimage}
               className="img-fluid"
               alt={post?.title}
             />
@@ -100,7 +103,7 @@ export default function PostDetail() {
             <div className="d-flex border-dark border border-start-0 border-end-0 p-4">
               <Avatar
                 alt="Remy Sharp"
-                src={post?.imgUrl || noimage}
+                src={post?.user?.img_url || noimage}
                 className={classes.large}
               />
               <div className="d-flex flex-grow-1 flex-column mx-2">

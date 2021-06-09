@@ -15,7 +15,7 @@ export default function PostCard(props) {
         <div className="post__image">
           <div
             className="post__img"
-            style={{ backgroundImage: `url(${post?.imgUrl || noimage})` }}
+            style={{ backgroundImage: `url(${post?.img_url || noimage})` }}
           ></div>
         </div>
         {decription && (

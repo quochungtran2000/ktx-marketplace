@@ -18,6 +18,9 @@ const postApi = {
   },
   deleteById: (id) => {
     return axiosClient.delete(`${apiUrl}/post/${id}`)
+  },
+  createPost: (post) => {
+    return axiosClient.post(`${apiUrl}/post`, post)
   }
 }
 

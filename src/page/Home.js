@@ -10,6 +10,7 @@ import locationApi from "../api/locationApi";
 import categoryApi from "../api/categoryApi";
 import postApi from "../api/postApi";
 import useFetch from "../hook/useFetch";
+import useFetchQuery from "../hook/useFetchQuery";
 // import useFetchQuery from "../hook/useFetchQuery";
 
 export default function Home() {
@@ -19,11 +20,11 @@ export default function Home() {
   );
   const { data: postData, loading: postDataLoading } = useFetch(
     postApi.getAll,
-    { size: 4 }
+    { size: 9 }
   );
-  const { data: postHcm, loading: postHcmLoading } = useFetch(postApi.getAll, {
+  const { data: postHcm, loading: postHcmLoading } = useFetchQuery(postApi.getAll, {
     location: 3,
-    size: 3,
+    size: 9,
   });
   const { data: locationData, loading: locationLoading } = useFetch(
     locationApi.getAll,

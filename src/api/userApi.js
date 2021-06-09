@@ -12,9 +12,9 @@ const userApi = {
     const url = `${apiUrl}/post/${id}`;
     return axiosClient.get(url);
   },
-  getUser: (params) => {
-    const url = `${apiUrl}/user/authenticate`;
-    return axiosClient.post(url,)
+  getUser: (config) => {
+    const url = `${apiUrl}/getUser`;
+    return axiosClient.get(url,config)
   },
   createUser: (user) => {
     const url = `${apiUrl}/user/signup`

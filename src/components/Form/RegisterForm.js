@@ -12,24 +12,19 @@ export default function LoginForm(props) {
   const { register, handleSubmit } = useForm();
   const onSubmit = async (data) => {
     console.log(data)
-    console.log(data.file.length)
-    console.log(!!data.file.Length)
-    const formData = new FormData();
-    formData.append("file", data.file[0]);
-    formData.append('upload_preset','ceh3abtd');
-    const cloudinaryReponse = await cloudinaryApi.upload(formData)
-   
-    // Axios.post('https://api.cloudinary.com/v1_1/hunghamhoc/image/upload',formData, {
-    //   headers:{
-    //     'Content-Type':'multipart/form-data'
-    //   }
-    // })
-    const user = {...data, img_url: cloudinaryReponse?.data?.url || null}
+    let img_url = '';
+    if(data.file[0]){
+      const formData = new FormData();
+      formData.append("file", data.file[0]);
+      formData.append('upload_preset','ceh3abtd');
+      const cloudinaryReponse = await cloudinaryApi.upload(formData)
+      img_url = cloudinaryReponse?.data?.url;
+    }
+    const user = {...data, img_url}
     const {jwt} = await userApi.createUser(user)
-    localStorage.setItem('token', jwt)
-    setToken(jwt)
-    // Axios.post('https://ktx-be.herokuapp.com/user/createUser', user)
-    // toast.success('Đăng Ký thành công vui lòng đăng nhập');
+    const token = `Bearer ${jwt}`
+    localStorage.setItem('token',token)
+    setToken(token)
     openLoginForm();
     onClose();
    

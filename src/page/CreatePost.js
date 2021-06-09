@@ -1,62 +1,66 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Layout from "../components/Layout/Layout";
 import locationApi from "../api/locationApi";
-import useFetchQuery from "../hook/useFetchQuery";
 import categoryApi from "../api/categoryApi";
 import { useForm } from "react-hook-form";
-import Axios from "axios";
 import { toast } from "react-toastify";
 import { Editor } from "@tinymce/tinymce-react";
 import { useUser } from "../contexts/userContext";
 import SaveIcon from "@material-ui/icons/Save";
 import Button from "@material-ui/core/Button";
+import postApi from "../api/postApi";
+import cloudinaryApi from "../api/cloudinaryApi";
+import useFetch from "../hook/useFetch";
 export default function CreatePost() {
-  const { user, token } = useUser();
-  const { data: locationData, loading: locationLoading } = useFetchQuery(
+  const { data: locationData, loading: locationLoading } = useFetch(
     locationApi.getAll,
     {}
   );
-  const { data: categoryData, loading: categoryLoading } = useFetchQuery(
+  const { data: categoryData, loading: categoryLoading } = useFetch(
     categoryApi.getAll,
     {}
   );
+  const [cateSelect, setCateSelect] = useState(categoryData?.[0]?.category_id);
+  const [locaSelect, setLocaSelect] = useState(locationData?.[0]?.location_id);
+  const { user } = useUser();
   const editorRef = useRef(null);
   const { register, handleSubmit } = useForm();
+  useEffect(() => {
+    setCateSelect(+categoryData?.[0]?.category_id);
+    setLocaSelect(+locationData?.[0]?.location_id);
+  }, [categoryData, locationData]);
+
   const onSubmit = async (data) => {
-    const formData = new FormData();
-    formData.append("file", data.file[0]);
-    formData.append("upload_preset", "ceh3abtd");
-    const cloudinaryReponse = await Axios.post(
-      "https://api.cloudinary.com/v1_1/hunghamhoc/image/upload",
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
+    let img_url = '';
+    if (data.file.length) {
+      const formData = new FormData();
+      formData.append("file", data.file[0]);
+      formData.append("upload_preset", "ceh3abtd");
+      const cloudinaryReponse = await cloudinaryApi.upload(formData);
+      console.log(cloudinaryReponse);
+      img_url = cloudinaryReponse?.data?.url;
+    }
     const post = {
       ...data,
-      img_url: cloudinaryReponse?.data?.url,
+      img_url,
       content: editorRef?.current?.getContent(),
       price: +data?.price,
       location: {
-        location_id: data?.location,
+        location_id: +data?.location || locaSelect,
       },
       category: {
-        category_id: data?.category,
+        category_id: +data?.category || cateSelect,
       },
       user: {
         userid: user?.userid,
       },
     };
-    await Axios.post("https://ktx-be.herokuapp.com/createPost", post, {
-      headers: {
-        Authorization: token,
-      },
-    });
+    console.log(post)
+
+    await postApi.createPost(post);
     toast.success("Đăng bài thành công");
   };
+
   const settings = {
     height: 500,
     menubar: true,
@@ -121,7 +125,7 @@ export default function CreatePost() {
             <div className="col-sm-10">
               <select
                 className="form-select"
-                placeholder="loacing"
+                placeholder="loading"
                 id="location"
                 {...register("location")}
               >
@@ -129,10 +133,10 @@ export default function CreatePost() {
                 {!locationLoading &&
                   locationData?.map((location) => (
                     <option
-                      key={location?.location_id}
-                      value={location?.location_id}
+                      key={location.location_id}
+                      value={location.location_id}
                     >
-                      {location?.name}
+                      {location.name}
                     </option>
                   ))}
               </select>
@@ -148,12 +152,14 @@ export default function CreatePost() {
                 className="form-select"
                 id="category"
                 {...register("category")}
+                defaultValue={cateSelect + ""}
               >
+                {locationLoading && <option>Loading....</option>}
                 {!categoryLoading &&
-                  categoryData?.map((category) => (
+                  categoryData?.map((category, i) => (
                     <option
                       key={category?.category_id}
-                      value={category?.category_id}
+                      value={+category?.category_id}
                     >
                       {category?.name}
                     </option>
@@ -178,10 +184,11 @@ export default function CreatePost() {
                 variant="contained"
                 color="primary"
                 size="small"
+                type="submit"
                 // className={classes.button}
-                style={{margin: '3rem 0'}}
+                style={{ margin: "3rem 0" }}
                 startIcon={<SaveIcon />}
-                onClick={onsubmit}
+                // onClick={onsubmit}
               >
                 Save
               </Button>
