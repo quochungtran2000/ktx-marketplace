@@ -9,7 +9,7 @@ import useFetch from "../hook/useFetch";
 export default function Communicate() {
   const { data: page, loading: pageLoading } = useFetch(
     staticpageApi.getByType,
-    "CONTACT"
+    "communicate"
   );
 
   function createMarkup(page) {
