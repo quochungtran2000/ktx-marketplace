@@ -21,6 +21,9 @@ const postApi = {
   },
   createPost: (post) => {
     return axiosClient.post(`${apiUrl}/post`, post)
+  },
+  updatePost: (post) => {
+    return axiosClient.put(`${apiUrl}/post`, post)
   }
 }
 

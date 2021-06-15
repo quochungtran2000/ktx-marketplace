@@ -4,28 +4,29 @@ import locationApi from "../api/locationApi";
 import useFetchQuery from "../hook/useFetchQuery";
 import categoryApi from "../api/categoryApi";
 import { useForm } from "react-hook-form";
-import Axios from "axios";
+// import Axios from "axios";
 import { toast } from "react-toastify";
 import { Editor } from "@tinymce/tinymce-react";
 import { useUser } from "../contexts/userContext";
 import SaveIcon from "@material-ui/icons/Save";
 import Button from "@material-ui/core/Button";
 import postApi from "../api/postApi";
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 import { getId } from "../assets/consts/function";
 import useFetch from "../hook/useFetch";
+import cloudinaryApi from "../api/cloudinaryApi";
 export default function UpdatePost() {
-  const { user, token } = useUser();
+  const { user } = useUser();
 
-  const {slug} = useParams()
-  console.log({slug})
-  const { data: post, loading: postLoading } = useFetch(
+  const { slug } = useParams();
+  console.log({ slug });
+  const { data: post } = useFetch(
     postApi.getById,
     +getId(slug)
   );
 
-  console.log(post)
-  console.log(postLoading)
+  // console.log(post);
+  // console.log(postLoading);
 
   const { data: locationData, loading: locationLoading } = useFetchQuery(
     locationApi.getAll,
@@ -38,38 +39,35 @@ export default function UpdatePost() {
   const editorRef = useRef(null);
   const { register, handleSubmit } = useForm();
   const onSubmit = async (data) => {
-    const formData = new FormData();
-    formData.append("file", data.file[0]);
-    formData.append("upload_preset", "ceh3abtd");
-    const cloudinaryReponse = await Axios.post(
-      "https://api.cloudinary.com/v1_1/hunghamhoc/image/upload",
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
-    const post = {
-      ...data,
-      img_url: cloudinaryReponse?.data?.url,
+    console.log(`data`, data);
+    let img_url = post?.img_url;
+    if(data.file[0]){
+      const formData = new FormData();
+      formData.append("file", data.file[0]);
+      formData.append('upload_preset','ceh3abtd');
+      const cloudinaryReponse = await cloudinaryApi.upload(formData)
+      console.log(cloudinaryReponse)
+      img_url = cloudinaryReponse.data.url;
+    }
+    const payload = {
+      title: data?.title || post?.title,
+      img_url,
       content: editorRef?.current?.getContent(),
-      price: +data?.price,
+      price: +data?.price || +post?.price,
       location: {
-        location_id: data?.location,
+        location_id: +data?.location || +post?.location?.location_id,
       },
       category: {
-        category_id: data?.category,
+        category_id: +data?.category || +post?.category?.category_id,
       },
       user: {
         userid: user?.userid,
       },
+      id: post?.id,
     };
-    await Axios.post("https://ktx-be.herokuapp.com/createPost", post, {
-      headers: {
-        Authorization: token,
-      },
-    });
+    console.log(`payload`, payload);
+    const result =  await postApi.updatePost(payload);
+    console.log(`result`, result)
     toast.success("Đăng bài thành công");
   };
   const settings = {
@@ -100,6 +98,7 @@ export default function UpdatePost() {
                 id="title"
                 {...register("title")}
                 placeholder={"Nhập tiêu đề"}
+                defaultValue={post?.title}
               />
             </div>
           </div>
@@ -126,6 +125,7 @@ export default function UpdatePost() {
                 className="form-control"
                 id="price"
                 {...register("price")}
+                defaultValue={post?.price}
               />
             </div>
           </div>
@@ -140,16 +140,25 @@ export default function UpdatePost() {
                 id="location"
                 {...register("location")}
               >
+                {post?.location && (
+                  <option value={post?.location?.location_id} defaultValue>
+                    {post?.location?.name}
+                  </option>
+                )}
                 {locationLoading && <option>Loading....</option>}
                 {!locationLoading &&
-                  locationData?.map((location) => (
-                    <option
-                      key={location?.location_id}
-                      value={location?.location_id}
-                    >
-                      {location?.name}
-                    </option>
-                  ))}
+                  locationData
+                    ?.filter(
+                      (x) => x.location_id !== post?.location?.location_id
+                    )
+                    .map((location) => (
+                      <option
+                        key={location?.location_id}
+                        value={location?.location_id}
+                      >
+                        {location?.name}
+                      </option>
+                    ))}
               </select>
             </div>
           </div>
@@ -164,15 +173,24 @@ export default function UpdatePost() {
                 id="category"
                 {...register("category")}
               >
+                {post?.category && (
+                  <option value={post?.category?.category_id} defaultValue>
+                    {post?.category?.name}
+                  </option>
+                )}
                 {!categoryLoading &&
-                  categoryData?.map((category) => (
-                    <option
-                      key={category?.category_id}
-                      value={category?.category_id}
-                    >
-                      {category?.name}
-                    </option>
-                  ))}
+                  categoryData
+                    ?.filter(
+                      (x) => x.category_id !== post?.category?.category_id
+                    )
+                    .map((category) => (
+                      <option
+                        key={category?.category_id}
+                        value={category?.category_id}
+                      >
+                        {category?.name}
+                      </option>
+                    ))}
               </select>
             </div>
           </div>
@@ -185,7 +203,7 @@ export default function UpdatePost() {
               <Editor
                 id="content"
                 onInit={(evt, editor) => (editorRef.current = editor)}
-                initialValue={``}
+                initialValue={post?.content}
                 init={settings}
                 className="mb-4"
               />
@@ -193,8 +211,9 @@ export default function UpdatePost() {
                 variant="contained"
                 color="primary"
                 size="small"
+                type="submit"
                 // className={classes.button}
-                style={{margin: '3rem 0'}}
+                style={{ margin: "3rem 0" }}
                 startIcon={<SaveIcon />}
                 onClick={onsubmit}
               >

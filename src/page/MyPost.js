@@ -22,6 +22,7 @@ import { Alert, AlertTitle } from "@material-ui/lab";
 import { useUser } from "../contexts/userContext";
 import { useLoading } from "../contexts/loadingContext";
 import useFetch from "../hook/useFetch";
+import noimage from '../assets/images/noimage.jpeg'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -62,12 +63,13 @@ export default function MyPost(props) {
   const [open, setOpen] = useState(false);
   const [select, setSelect] = useState();
   const { user } = useUser();
-  const { data: postData, loading: postDataLoading, reload } = useFetch(
-    postApi.getByUser,
-    { user: user?.userid }
-  );
+  const {
+    data: postData,
+    loading: postDataLoading,
+    reload,
+  } = useFetch(postApi.getByUser, { user: user?.userid });
 
-  const { setLoading } = useLoading()
+  const { setLoading } = useLoading();
   console.log(user);
   console.log(postData, postDataLoading);
   const onClose = () => {
@@ -76,9 +78,9 @@ export default function MyPost(props) {
   const onDeleteClick = async (id) => {
     setOpen(false);
     setLoading(true);
-    await postApi.deleteById(id)
-    await reload()
-    await setLoading(false);
+    await postApi.deleteById(id);
+    reload();
+    setLoading(false);
   };
 
   console.log(`select`, select);
@@ -91,6 +93,9 @@ export default function MyPost(props) {
           <Table className={classes.table} aria-label="simple table">
             <TableHead>
               <TableRow>
+                <TableCell colSpan="1" align="left">
+                  Image
+                </TableCell>
                 <TableCell colSpan="2" align="left">
                   Title
                 </TableCell>
@@ -106,17 +111,20 @@ export default function MyPost(props) {
                 <TableCell colSpan="2" align="left">
                   content
                 </TableCell>
-                <TableCell colSpan="1" align="left">
-                  Title
+                <TableCell colSpan="1" align="center">
+                  update
                 </TableCell>
-                <TableCell colSpan="1" align="left">
-                  category
+                <TableCell colSpan="1" align="center">
+                  delete
                 </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {postData?.post?.map((row) => (
                 <TableRow key={row?.id}>
+                  <TableCell colSpan="1" align="left">
+                  <img  src={row?.img_url || noimage} alt={row?.title} style={{width: '50px'}} />
+                </TableCell>
                   <TableCell
                     colSpan="2"
                     // scope="row"
@@ -136,7 +144,16 @@ export default function MyPost(props) {
                   <TableCell colSpan="2" align="left">
                     <span className={classes.cell}>{row?.content}</span>
                   </TableCell>
-                  <TableCell colSpan="1" align="left">
+                  <TableCell colSpan="1" align="center">
+                    <span className={classes.cell}>
+                      <Link
+                        to={`/update/${removeAccents(row?.title, row?.id)}`}
+                      >
+                        <i className="fa fa-edit"></i>
+                      </Link>
+                    </span>
+                  </TableCell>
+                  <TableCell colSpan="1" align="center">
                     <span className={classes.cell}>
                       <i
                         className={`${classes.deleteIcon} fa fa-trash`}
@@ -173,13 +190,6 @@ export default function MyPost(props) {
                         </div>
                       </div>
                     </ModalBase>
-                  </TableCell>
-                  <TableCell colSpan="1" align="left">
-                    <span className={classes.cell}>
-                      <Link to={`/update/${removeAccents(row?.name,row?.id)}`}>
-                        <i className="fa fa-edit"></i>
-                      </Link>
-                    </span>
                   </TableCell>
                 </TableRow>
               ))}
